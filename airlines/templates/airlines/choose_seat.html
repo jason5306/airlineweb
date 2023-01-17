@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>Choose Seat</h1>
+{% endblock  %}
+
+{% block content %}
+
+<div class="mb-3">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <br>
+        <center>
+            <div class="btn-group" >
+                <a href="{% url 'arline_details' airline_id current_order %}" class="btn btn-secondary">Back</a>
+                <button class="btn btn-primary" type="submit">Next</button>
+            </div>
+        </center>
+
+    </form>
+
+</div>
+
+{% endblock  %}

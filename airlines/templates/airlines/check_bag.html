@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>Check Bag</h1>
+{% endblock  %}
+
+{% block content %}
+
+<div class="mb-3">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <br>
+
+        {% if carbon_offset_choice == 0 or carbon_offset_choice == 3 %}
+        <center>
+            <div class="btn-group" >
+                <a href="{% url 'choose_seat' airline_id current_order %}" class="btn btn-secondary">Back</a>
+                <button class="btn btn-primary" onclick="save_total()">Order Summary</button>
+            </div>
+        </center>
+        {% else %}
+        <center>
+            <div class="btn-group" >
+                <a href="{% url 'choose_seat' airline_id current_order %}" class="btn btn-secondary">Back</a>
+                <button class="btn btn-primary" onclick="save_check_bag()">Next</button>
+            </div>
+        </center>        
+        {% endif %}
+    </form>
+
+</div>
+
+<script>
+    function save_check_bag(){
+
+        localStorage.setItem('check_bag_price', $("#id_check_bag option:selected").val().split("+")[1].replace('CNY)',""));
+        
+    }
+    function save_total(){
+
+        
+        var carbon_choice = "{{ carbon_offset_choice }}";
+        var airline_price = localStorage.getItem("price");
+        var check_bag_price = Number($("#id_check_bag option:selected").val().split("+")[1].replace('CNY)',""));
+        localStorage.setItem('check_bag_price', check_bag_price);
+
+
+        if(carbon_choice == 3){
+            console.log("Default include {{carbon_offset_fee}}");
+            console.log(airline_price + "add {{carbon_offset_fee}} :");
+            var fee = Number(airline_price.replace('CNY',""))+Number('{{carbon_offset_fee}}')+check_bag_price;
+            console.log(fee);
+            localStorage.setItem('total_price', String(fee) + 'CNY');  
+            localStorage.setItem('paid', "true");          
+        }
+        else {
+            console.log('No offset');
+            var fee = Number(airline_price.replace('CNY',""))+check_bag_price;
+            localStorage.setItem('total_price', String(fee) + 'CNY'); 
+            localStorage.setItem('paid', "false");
+        }
+        
+    }
+</script>
+
+{% endblock  %}

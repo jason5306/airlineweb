@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+<h1>Carbon Offset</h1>
+{% endblock  %}
+{% block content %}
+
+<!-- {% if carbon_offset_choice == 0 %}
+<div class="card">
+<h5 class="card-header">Carbon Offset</h5>
+<div class="card-body">
+    <h5 class="card-title">Control Group</h5>
+    <p class="card-text">Standard procedure; no carbon offset program offered during booking as per usual procedure in most airlines.</p>
+    <a href="#" class="btn btn-primary">Go</a>
+</div>
+</div>
+{% endif %} -->
+
+{% if carbon_offset_choice == 1 %}
+<div class="card">
+    <h5 class="card-header">Carbon Offset</h5>
+    <div class="card-body">
+        <!-- <h5 class="card-title">Basic Program (Opt-in)</h5> -->
+        <!-- <p class="card-text">Carbon offset is offered as a possibility that passengers may choose (opt-in); the few airlines that offer carbon offset during the online booking present it this way.</p> -->
+        I accept to pay CNY{{carbon_offset_fee}} to help reduce the
+        <a href="#" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Carbon offsetting is simply a way for individuals as airline passengers to “neutralize” their proportion of an aircraft's carbon emissions on a particular journey by investing in carbon reduction projects. This investment includes projects, such as renewable energy from windfarms and hydro-plants."> effects of carbon emmissions (click for more information).</a>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="check_button" onclick="switch_check(this)">
+            <label class="form-check-label" for="flexCheckDefault">
+            Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="check_button_no" onclick="switch_check(this)">
+            <label class="form-check-label" for="flexCheckChecked">
+            No
+            </label>
+          </div>
+    </div>
+</div>
+{% endif %}
+
+{% if carbon_offset_choice == 2 %}
+<div class="card">
+    <h5 class="card-header">Carbon Offset</h5>
+    <div class="card-body">
+        <!-- <h5 class="card-title">Default with Opt-out Choice</h5>
+        <p class="card-text">Carbon offset is offered already pre-selected; passengers may refuse this selection (opt-out). This will be one of the innovative defaults tested in this project.</p> -->
+        I accept to pay CNY{{carbon_offset_fee}} to help reduce the
+        <a href="#" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Carbon offsetting is simply a way for individuals as airline passengers to “neutralize” their proportion of an aircraft's carbon emissions on a particular journey by investing in carbon reduction projects. This investment includes projects, such as renewable energy from windfarms and hydro-plants."> effects of carbon emmissions (click for more information).</a>
+        
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="check_button" checked onclick="switch_check(this)">
+            <label class="form-check-label" for="flexCheckDefault">
+            Yes (This option has been selected but you can choose to opt-out.)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="check_button_no" onclick="switch_check(this)">
+            <label class="form-check-label" for="flexCheckChecked">
+            No
+            </label>
+          </div>
+        
+    </div>
+</div>
+{% endif %}
+
+<!-- {% if carbon_offset_choice == 3 %}
+<div class="card">
+    <h5 class="card-header">Carbon Offset</h5>
+    <div class="card-body">
+        <h5 class="card-title">Default Added Fee (No Opt-out)</h5>
+        <p class="card-text">Carbon offset included by default in the ticket cost; The carbon fee will be automatically added to all other aviation taxes and fees. This is the second innovative deafult option being tested in this project.</p>
+
+        <a href="#" class="btn btn-primary">Go</a>
+    </div>
+</div>
+{% endif %} -->
+<br /><br />
+
+<center>
+    <div class="btn-group" >
+        <a href="{% url 'check_bag' airline_id current_order %}" class="btn btn-secondary">Back</a>
+        <a href="{% url 'submit_order' airline_id current_order %}" class="btn btn-info" type="button" onclick="check_out()">Checkout</a>
+    </div>
+</center>
+
+
+<!-- Passing Data -->
+<script>
+    function switch_check(obj){
+        console.log(document.getElementById(obj.id).checked)
+        if(document.getElementById(obj.id).checked){
+            // document.getElementById(obj.id).removeAttribute("checked");
+            if(obj.id == 'check_button'){
+                document.getElementById('check_button_no').checked = false;
+            }
+            else{
+                document.getElementById('check_button').checked = false;
+            }
+        }
+        else{
+            if(obj.id == 'check_button'){
+                document.getElementById('check_button_no').checked = false;
+                
+            }
+            else{
+                document.getElementById('check_button').checked = false;
+            }
+        }
+    }
+
+    function check_out(){
+        var carbon_choice = "{{ carbon_offset_choice }}";
+        var airline_price = localStorage.getItem("price");
+        var check_bag_price = Number(localStorage.getItem('check_bag_price'));
+        
+        if(carbon_choice == 1 || carbon_choice == 2){
+            console.log(document.getElementById('check_button').checked);
+            if(document.getElementById('check_button').checked){
+                console.log(airline_price + " add {{carbon_offset_fee}} :");
+                var fee = Number(airline_price.replace('CNY',""))+Number('{{carbon_offset_fee}}')+check_bag_price;
+                console.log(fee);
+                localStorage.setItem('total_price', String(fee) + 'CNY');
+                localStorage.setItem('paid', "true");
+            }
+            else {
+                console.log("Cancle Fee");
+                var fee = Number(airline_price.replace('CNY',""))+check_bag_price;
+                localStorage.setItem('total_price', String(fee) + 'CNY'); 
+                localStorage.setItem('paid', "false");
+            }
+        }
+        // else if(carbon_choice == 3){
+        //     console.log("Default include {{carbon_offset_fee}}");
+        //     console.log(airline_price + "add {{carbon_offset_fee}} :");
+        //     var fee = Number(airline_price.replace('$',"").split(" ").join(""))+Number('{{carbon_offset_fee}}');
+        //     console.log(fee);
+        //     localStorage.setItem('total_price', '$'+ String(fee));
+        // }
+        // else {
+        //     console.log('No offset');
+        //     localStorage.setItem('total_price', airline_price);
+        // }
+
+
+        console.log('total price: ' + localStorage.getItem('total_price'));
+    }
+
+
+</script>
+<script>
+
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+    
+</script>
+{% endblock  %}

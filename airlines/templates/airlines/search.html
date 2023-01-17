@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method='POST'>
+    {% csrf_token %}
+    Starting Airport: {{ airlineFilter.form.starting_airport }}
+    Destination Airport: {{ airlineFilter.form.destination_airport }}
+    Airlines: {{ airlineFilter.form.airlines }}
+    <br>
+    <center>
+        <div class="btn-group" >
+            <input type="submit" class="btn btn-primary" value="Search"/>
+            <a onclick="javascript:location.reload();" class="btn btn-info">Reset</a>
+        </div>
+    </center>
+</form>
+<br />
+{% if airlineFilter.qs %}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>            
+            <th>Starting Airport</th>
+            <th>Destination Airport</th>
+            <th>Airlines</th>
+            <th>Flight</th>
+            <th>Aircraft Type</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Punctuality Rate</th>
+            <th>Ticket Price</th>
+        </thead>
+        <tbody>
+            {% for airline in airlineFilter.qs %}
+            
+            <tr class="clickable text-center" onclick="window.location='{% url 'arline_details' airline.pk order_id %}'">
+                <td>{{ airline.starting_airport }}</td>
+                <td>{{ airline.destination_airport }}</td>
+                <td>{{ airline.airlines }}</td>
+                <td>{{ airline.flight }}</td>
+                <td>{{ airline.aircraft_type }}</td>
+                <td>{{ airline.departure_time }}</td>
+                <td>{{ airline.arrival_time }}</td>
+                <td>{{ airline.punctuality_rate }}</td>
+                <td>{{ airline.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endif %}
+
+{% endblock  %}

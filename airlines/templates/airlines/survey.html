@@ -1,0 +1,622 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>Survey</h1>
+{% endblock  %}
+
+{% block content %}
+
+
+<div class="mb-3">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <label for="id_subject_gender" class="form-label">Your gender:</label>
+        {{ form.subject_gender}}
+        <label for="id_subject_age" class="form-label">Your age:</label>
+        {{ form.subject_age}}
+        <label for="id_subject_marital" class="form-label">Your marital status:</label>
+        {{ form.subject_marital}}
+        <br>
+        <div class="card">
+            <div class="card-body">
+              <p>You were asked to make several regarding a flight purchase. What did you think about the online system you used to make your choices?</p>
+              <label for="id_survery_Q1_a" class="form-label">a. The online system was credible</label>
+              <br>
+              <div class="d-inline-flex p-2">
+                {{ form.survery_Q1_a}}
+              </div>
+              <br>
+
+              <label for="id_survery_Q1_b" class="form-label">b. The online system looked similar to other websites/ apps I use to book my flight tickets</label>
+              <br>
+              <div class="d-inline-flex p-2">
+                {{ form.survery_Q1_b}}
+              </div>
+              <br>
+              <label for="id_survery_Q1_c" class="form-label">c. I was satisfied with the layout of the online system</label>
+              <br>
+              <div class="d-inline-flex p-2">
+                {{ form.survery_Q1_c}}
+              </div>
+              <br>
+              <label for="id_survery_Q1_d" class="form-label">d. I was satisfied with my flight choices</label>
+              <br>
+              <div class="d-inline-flex p-2">
+                {{ form.survery_Q1_d}}
+              </div>
+              <br>
+              <label for="id_survery_Q1_e" class="form-label">e. If it was a real purchase, I would have accepted to pay the amount proposed by the online system</label>
+              <br>
+              <div class="d-inline-flex p-2">
+                {{ form.survery_Q1_e}}
+              </div>                                        
+            </div>
+        </div>
+        <br>
+        <div class="card">
+        <div class="card-body">
+            <label for="survery_Q2" class="form-label">Some choices in your flight purchase were related to carbon offset fees. Have you heard about carbon offset fees in air travel before? </label>
+            {{ form.survery_Q2}}
+        </div>
+        </div>
+        <br>
+
+        <div class="card">
+        <div class="card-body">
+            <p>In your opinion, asking for passengers to pay for carbon offset fees is: </p>
+            <label for="survery_Q3_a" class="form-label">a. acceptable</label>
+            <br>
+            <div class="d-inline-flex p-2">
+            {{ form.survery_Q3_a}}
+            </div>
+            <br>
+
+            <label for="survery_Q3_b" class="form-label">b. important</label>
+            <br>
+            <div class="d-inline-flex p-2">
+            {{ form.survery_Q3_b}}
+            </div>
+            <br>       
+            
+            <label for="survery_Q3_c" class="form-label">c. sensible</label>
+            <br>
+            <div class="d-inline-flex p-2">
+            {{ form.survery_Q3_c}}
+            </div>
+            <br>                  
+
+            <label for="survery_Q3_d" class="form-label">d. necessary</label>
+            <br>
+            <div class="d-inline-flex p-2">
+            {{ form.survery_Q3_d}}
+            </div>
+            <br>     
+
+        </div>
+        </div>
+        <br>
+
+
+        <div class="card" id="survey_Q4">
+            <div class="card-body">
+                <p>There are different climate policies that Governments can implement to reduce carbon emissions from aviation. Please rank from 1 (your most preferred) to 5 (your least preferred) climate policy options.</p>
+                
+
+                <label for="survery_Q4_a" class="form-label">a. Frequent flyer tax</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q4_a }}
+                </div>
+                <div class="survery_Q4_ratios" id="survery_Q4_a">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="1" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio1">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="2" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio2">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio3" value="3" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio3">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio4" value="4" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio4">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio5" value="5" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio5">5</label>
+                    </div> 
+                </div>
+
+                <label for="survery_Q4_b" class="form-label">b. Increase aviation taxes</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q4_b }}
+                </div>
+                <div class="survery_Q4_ratios" id="survery_Q4_b">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio6" value="1" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio6">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio7" value="2" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio7">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio8" value="3" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio8">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio9" value="4" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio9">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio10" value="5" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio10">5</label>
+                    </div> 
+                </div>   
+                
+
+                <label for="survery_Q4_c" class="form-label">c. Mandatory carbon offsetting pay for passengers</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q4_c }}
+                </div>
+                <div class="survery_Q4_ratios" id="survery_Q4_c">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio11" value="1" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio11">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio12" value="2" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio12">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio13" value="3" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio13">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio14" value="4" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio14">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio15" value="5" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio15">5</label>
+                    </div> 
+                </div> 
+
+                <label for="survery_Q4_d" class="form-label">d. Limited number of flights per year per person</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q4_d }}
+                </div>
+                <div class="survery_Q4_ratios" id="survery_Q4_d">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio16" value="1" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio16">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio17" value="2" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio17">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio18" value="3" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio18">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio19" value="4" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio19">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio20" value="5" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio20">5</label>
+                    </div> 
+                </div>  
+                
+                <label for="survery_Q4_e" class="form-label">e. Sanctions on international travel</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q4_e }}
+                </div>
+                <div class="survery_Q4_ratios" id="survery_Q4_e">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio21" value="1" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio21">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio22" value="2" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio22">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio23" value="3" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio23">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio24" value="4" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio24">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio25" value="5" onclick="toggle_check_Q4(this)">
+                        <label class="form-check-label" for="inlineRadio25">5</label>
+                    </div> 
+                </div>                 
+
+
+
+
+            </div>
+        </div>
+        <br>
+        <div class="card" id="survey_Q5">
+            <div class="card-body">
+                <p>If mandatory carbon offset payments for passengers are implemented, in which type of project would you prefer the money to be invested in? Please rank from 1 (your most preferred) to 7 (your least preferred) carbon offset options.</p>
+                
+
+                <label for="survery_Q5_a" class="form-label">a. Plant trees and combat deforestation</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q5_a }}
+                </div>
+                <div class="survery_Q5_ratios" id="survery_Q5_a">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio26" value="1" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio26">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio27" value="2" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio27">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio28" value="3" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio28">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio29" value="4" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio29">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio30" value="5" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio30">5</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio31" value="6" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio31">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio32" value="7" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio32">7</label>
+                    </div> 
+                </div>
+
+                <label for="survery_Q5_b" class="form-label">b. Investment in renewable energy (e.g., solar panels)</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q5_b }}
+                </div>
+                <div class="survery_Q5_ratios" id="survery_Q5_b">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio33" value="1" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio33">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio34" value="2" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio34">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio35" value="3" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio35">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio36" value="4" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio36">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio37" value="5" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio37">5</label>
+                    </div> 
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio38" value="6" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio38">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio39" value="7" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio39">7</label>
+                    </div> 
+                </div>   
+                
+
+                <label for="survery_Q5_c" class="form-label">c. Subsidies for electric cars</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q5_c }}
+                </div>
+                <div class="survery_Q4_ratios" id="survery_Q5_c">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio40" value="1" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio40">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio41" value="2" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio41">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio42" value="3" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio42">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio43" value="4" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio43">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio44" value="5" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio44">5</label>
+                    </div> 
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio45" value="6" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio45">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio46" value="7" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio46">7</label>
+                    </div> 
+                </div> 
+
+                <label for="survery_Q5_d" class="form-label">d. Conservation and wildlife protection</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q5_d }}
+                </div>
+                <div class="survery_Q5_ratios" id="survery_Q5_d">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio47" value="1" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio47">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio48" value="2" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio48">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio49" value="3" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio49">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio50" value="4" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio50">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio51" value="5" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio51">5</label>
+                    </div> 
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio52" value="6" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio52">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio53" value="7" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio53">7</label>
+                    </div> 
+                </div>  
+                
+                <label for="survery_Q5_e" class="form-label">e. Clean air and water/ Reduce pollution</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q5_e }}
+                </div>
+                <div class="survery_Q5_ratios" id="survery_Q5_e">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio54" value="1" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio54">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio55" value="2" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio55">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio56" value="3" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio56">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio57" value="4" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio57">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio58" value="5" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio58">5</label>
+                    </div> 
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio59" value="6" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio59">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio60" value="7" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio60">7</label>
+                    </div> 
+                </div>                 
+
+                <label for="survery_Q5_f" class="form-label">f. Sustainable business and supply chain</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q5_f }}
+                </div>
+                <div class="survery_Q5_ratios" id="survery_Q5_f">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio61" value="1" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio61">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio62" value="2" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio62">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio63" value="3" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio63">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio64" value="4" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio64">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio65" value="5" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio65">5</label>
+                    </div> 
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio66" value="6" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio66">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio67" value="7" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio67">7</label>
+                    </div> 
+                </div>  
+
+                <label for="survery_Q5_g" class="form-label">g. Education and community development</label>
+                <div class="visually-hidden">
+                    {{ form.survery_Q5_g }}
+                </div>
+                <div class="survery_Q5_ratios" id="survery_Q5_g">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio68" value="1" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio68">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio69" value="2" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio69">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio70" value="3" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio70">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio71" value="4" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio71">4</label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio72" value="5" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio72">5</label>
+                    </div> 
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio73" value="6" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio73">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio74" value="7" onclick="toggle_check_Q5(this)">
+                        <label class="form-check-label" for="inlineRadio74">7</label>
+                    </div> 
+                </div>  
+            </div>
+            
+        </div>
+    
+        {% if order.carbon_choice == '3' %}
+        <br>
+        <div class="card">
+        <div class="card-body">
+            <label for="survery_Q6" class="form-label">Your flight included a mandatory fee for carbon offset. Did you notice this fee was included in your final ticket cost?</label>
+            {{ form.survery_Q6}}
+        </div>
+        </div>
+        <br>
+        {% endif%}
+        
+        <br>
+        <center>
+                <button class="btn btn-primary" type="submit">Submit</button>
+        </center>
+
+    </form>
+
+</div>
+<script>
+    function toggle_check_Q4(obj){
+        // console.log($('#'+obj.id).parent().parent().find("input[type='checkbox']:checked"))
+        // console.log($('#'+obj.id).prop('checked'))
+
+        if($('#'+obj.id).prop('checked') == true){
+            var checked_elems = $('#'+obj.id).parent().parent().find("input[type='checkbox']:checked");
+            var prev_checked_elem_id = NaN;
+            if(checked_elems.length == 2){
+                if(checked_elems[0].getAttribute('id') == obj.id){
+                    prev_checked_elem_id = checked_elems[1].getAttribute('id')
+                }
+                else{
+                    prev_checked_elem_id = checked_elems[0].getAttribute('id')
+                }
+            }
+            // console.log(prev_checked_elem_id)
+            $('#'+obj.id).parent().parent().find('input').removeAttr('checked');
+            $('#'+obj.id).prop('checked','true')
+            
+            var value = '[value="' + $('#'+obj.id).attr('value') + '"]';
+            // console.log(value)
+            $('#survey_Q4').find(value).prop('disabled','true');
+            $('#'+obj.id).removeAttr('disabled')
+
+            if(prev_checked_elem_id){
+                var prev_checked_value = $('#'+prev_checked_elem_id).attr('value')        
+                if($('#survey_Q4').find("input[value='" + prev_checked_value + "']:checked").length == 0){
+                    $('#survey_Q4').find("[value='" + prev_checked_value + "']").removeAttr('disabled')
+                }
+                
+            }
+
+        }
+        else{
+            $('#'+obj.id).removeAttr('checked');
+            $('#survey_Q4').find("[value='" + $('#'+obj.id).attr('value') + "']").removeAttr('disabled')
+            
+        }
+        var saved_value = $('#'+obj.id).parent().parent().find("input[type='checkbox']:checked").val()
+        var save_dest = $('#'+obj.id).parent().parent().attr('id').split('_')[2];
+        if(saved_value){
+            $('#id_survery_Q4_'+ save_dest).attr('value',saved_value)
+        }
+        else{
+            $('#id_survery_Q4_'+ save_dest).attr('value','')
+        }   
+
+        
+    }
+
+    function toggle_check_Q5(obj){
+        // console.log($('#'+obj.id).parent().parent().find("input[type='checkbox']:checked"))
+        // console.log($('#'+obj.id).prop('checked'))
+
+        if($('#'+obj.id).prop('checked') == true){
+            var checked_elems = $('#'+obj.id).parent().parent().find("input[type='checkbox']:checked");
+            var prev_checked_elem_id = NaN;
+            if(checked_elems.length == 2){
+                if(checked_elems[0].getAttribute('id') == obj.id){
+                    prev_checked_elem_id = checked_elems[1].getAttribute('id')
+                }
+                else{
+                    prev_checked_elem_id = checked_elems[0].getAttribute('id')
+                }
+            }
+            // console.log(prev_checked_elem_id)
+            $('#'+obj.id).parent().parent().find('input').removeAttr('checked');
+            $('#'+obj.id).prop('checked','true')
+            
+            var value = '[value="' + $('#'+obj.id).attr('value') + '"]';
+            // console.log(value)
+            $('#survey_Q5').find(value).prop('disabled','true');
+            $('#'+obj.id).removeAttr('disabled')
+
+            if(prev_checked_elem_id){
+                var prev_checked_value = $('#'+prev_checked_elem_id).attr('value')        
+                if($('#survey_Q5').find("input[value='" + prev_checked_value + "']:checked").length == 0){
+                    $('#survey_Q5').find("[value='" + prev_checked_value + "']").removeAttr('disabled')
+                }
+                
+            }
+
+        }
+        else{
+            $('#'+obj.id).removeAttr('checked');
+            $('#survey_Q5').find("[value='" + $('#'+obj.id).attr('value') + "']").removeAttr('disabled')
+            
+        }
+        var saved_value = $('#'+obj.id).parent().parent().find("input[type='checkbox']:checked").val()
+        var save_dest = $('#'+obj.id).parent().parent().attr('id').split('_')[2];
+        if(saved_value){
+            $('#id_survery_Q5_'+ save_dest).attr('value',saved_value)
+        }
+        else{
+            $('#id_survery_Q5_'+ save_dest).attr('value','')
+        }   
+
+        
+    }
+</script>
+
+{% endblock  %}

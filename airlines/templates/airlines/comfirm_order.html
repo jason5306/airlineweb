@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<h1>Comfirm Order</h1>
+{% endblock  %}
+{% block content %}
+
+<br /><br />
+<div class="mb-3">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+
+                {{ form.as_table}}
+                <tbody>
+                    <tr>
+                        <th>Starting Airport</th>
+                        <td id="starting_airport"></td>
+                    </tr>
+                    <tr>
+                        <th>Destination Airport</th>
+                        <td id="destination_airport"></td>
+                    </tr>
+                    <tr>
+                        <th>Airlines</th>
+                        <td id="airlines"></td>
+                    </tr>
+                    <tr>
+                        <th>Flight</th>
+                        <td id="flight"></td>
+                    </tr>
+                    <tr>
+                        <th>Aircraft Type</th>
+                        <td id="aircraft_type"></td>
+                    </tr>
+                    <tr>
+                        <th>Departure Time</th>
+                        <td id="departure_time"></td>
+                    </tr>
+                    <tr>
+                        <th>Arrival Time</th>
+                        <td id="arrival_time"></td>
+                    </tr>
+                    <tr>
+                        <th>Punctuality Rate</th>
+                        <td id="punctuality_rate"></td>
+                    </tr>
+                    <tr>
+                        <th>Seat Number</th>
+                        <td id="seat_number"></td>
+                    </tr>
+                    <tr>
+                        <th>Check Bag</th>
+                        <td id="check_bag"></td>
+                    </tr>
+
+
+                    <th>Total price</th>
+                    <td>
+                        <div class="dropdown">
+                        <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-name">
+                          Dropdown link
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#" id="dropdown-basefee">Action</a></li>
+                          <li><a class="dropdown-item" href="#" id="dropdown-carbonfee">Another action</a></li>
+                          <li><a class="dropdown-item" href="#" id="dropdown-check_bag_fee">Another action</a></li>
+                        </ul>
+                      </div>
+                    </td>
+
+                
+
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <center>
+            <div class="btn-group" >
+                {% if carbon_offset_choice == 0 or carbon_offset_choice == 3 %}
+                <a href="{% url 'check_bag' airline_id current_order %}" class="btn btn-secondary">Back</a>
+                {% else %}
+                <a href="{% url 'carbon_offset' airline_id current_order %}" class="btn btn-secondary">Back</a>
+                {% endif %}
+                <button class="btn btn-success">Confirm Order</button>
+            </div>
+        </center>
+        
+    </form>
+
+</div>
+<script>
+    var carbon_offset_fee = "{{ carbon_offset_fee }}";
+    var carbon_choice = "{{ carbon_offset_choice }}";
+    
+    document.getElementById("starting_airport").textContent = localStorage.getItem('starting_airport')
+    document.getElementById("destination_airport").textContent = localStorage.getItem('destination_airport')
+    document.getElementById("airlines").textContent = localStorage.getItem('airlines')
+    document.getElementById("flight").textContent = localStorage.getItem('flight')
+    document.getElementById("aircraft_type").textContent = localStorage.getItem('aircraft_type')
+    document.getElementById("departure_time").textContent = localStorage.getItem('departure_time')
+    document.getElementById("arrival_time").textContent = localStorage.getItem('arrival_time')
+    document.getElementById("punctuality_rate").textContent = localStorage.getItem('punctuality_rate')
+    document.getElementById("seat_number").textContent = document.getElementById('id_seat_number').getAttribute('value')
+    document.getElementById("check_bag").textContent = document.getElementById('id_check_bag').getAttribute('value')
+
+    document.getElementById('id_starting_airport').setAttribute('value',localStorage.getItem('starting_airport'))
+    document.getElementById('id_destination_airport').setAttribute('value',localStorage.getItem('destination_airport'))
+    document.getElementById('id_airlines').setAttribute('value',localStorage.getItem('airlines'))
+    document.getElementById('id_flight').setAttribute('value',localStorage.getItem('flight'))
+    document.getElementById('id_aircraft_type').setAttribute('value',localStorage.getItem('aircraft_type'))
+    document.getElementById('id_departure_time').setAttribute('value',localStorage.getItem('departure_time'))
+    document.getElementById('id_arrival_time').setAttribute('value',localStorage.getItem('arrival_time'))
+    document.getElementById('id_punctuality_rate').setAttribute('value',localStorage.getItem('punctuality_rate'))
+    document.getElementById('id_price').setAttribute('value',localStorage.getItem('price'))
+    document.getElementById('id_total_price').setAttribute('value',localStorage.getItem('total_price'))
+    document.getElementById('id_carbon_choice').setAttribute('value',localStorage.getItem('carbon_choice'))
+    document.getElementById('dropdown-name').textContent = localStorage.getItem('total_price')
+    document.getElementById('dropdown-basefee').textContent = 'Ticket Price - ' + localStorage.getItem('price')
+    if(localStorage.getItem('paid') == 'true'){
+        document.getElementById('dropdown-carbonfee').textContent = 'Carbon Offset - ' + carbon_offset_fee + "CNY";
+    }
+    else{
+        document.getElementById('dropdown-carbonfee').remove()
+    }
+    document.getElementById('dropdown-check_bag_fee').textContent = 'Check Bag Fee - ' + localStorage.getItem("check_bag_price") + "CNY";
+    
+    
+</script>
+{% endblock  %}

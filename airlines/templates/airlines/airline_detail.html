@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<h1>Airline Detail</h1>
+{% endblock  %}
+{% block content %}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <th>Starting Airport</th>
+            <th>Destination Airport</th>
+            <th>Airlines</th>
+            <th>Flight</th>
+            <th>Aircraft Type</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Punctuality Rate</th>
+            <th>Ticket Price</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ airline.starting_airport }}</td>
+                <td>{{ airline.destination_airport }}</td>
+                <td>{{ airline.airlines }}</td>
+                <td>{{ airline.flight }}</td>
+                <td>{{ airline.aircraft_type }}</td>
+                <td>{{ airline.departure_time }}</td>
+                <td>{{ airline.arrival_time }}</td>
+                <td>{{ airline.punctuality_rate }}</td>
+                <td>{{ airline.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+
+<center>
+<div class="btn-group" >
+    <a href="{% url 'search' current_order %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'choose_seat' airline.id current_order %}" class="btn btn-primary" onclick="save_airline()">Next</a>
+</div>
+</center>
+
+<!-- Passing Data -->
+<script>
+    localStorage.clear();
+    function save_airline(){
+        var carbon_choice = "{{ carbon_offset_choice }}";
+        
+
+        localStorage.setItem('starting_airport', '{{ airline.starting_airport }}');
+        localStorage.setItem('destination_airport', '{{ airline.destination_airport }}');
+        localStorage.setItem('airlines', '{{ airline.airlines }}');
+        localStorage.setItem('flight', '{{ airline.flight }}');
+        localStorage.setItem('aircraft_type', '{{ airline.aircraft_type }}');
+        localStorage.setItem('departure_time', '{{ airline.departure_time }}');
+        localStorage.setItem('arrival_time', '{{ airline.arrival_time }}');
+        localStorage.setItem('punctuality_rate', '{{ airline.punctuality_rate }}');
+        localStorage.setItem('price', '{{ airline.price }}');
+        localStorage.setItem('carbon_choice', '{{ carbon_offset_choice }}');
+
+        console.log('total price: ' + localStorage.getItem('total_price'));
+    }
+
+
+</script>
+{% endblock  %}
