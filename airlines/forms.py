@@ -57,7 +57,7 @@ class AddOrderForm(forms.ModelForm):
         fields = ('carbon_choice',)
         widgets = {
             
-            'carbon_choice': forms.TextInput(attrs={'class': 'form-control', 'type':''}),
+            'carbon_choice': forms.TextInput(attrs={'class': 'form-control', 'type':'hidden'}),
             
         }
 
